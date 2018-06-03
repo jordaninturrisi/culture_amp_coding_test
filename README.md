@@ -5,7 +5,7 @@ Your task is to build a simple CLI application that matches the text of user def
 
 ## Problem Statement
 
-For the purposes of publishing **_Benchmark Reports_** from our aggregated survey data, we use a set of standard questions, known as **_Reference Questions_**. However, within each survey the actual question text may be slightly different. We need to be able to match each individual question to a standard **_Reference Question_** in order to collect aggregated results.
+For the purposes of publishing **_Benchmark Reports_** from our aggregated survey data, we use a set of standard questions, known as `Reference Questions`. However, within each survey the actual question text may be slightly different. We need to be able to match each individual question to a standard `Reference Question` in order to collect aggregated results.
 
 
 ## Sample Data
