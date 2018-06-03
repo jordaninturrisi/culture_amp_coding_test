@@ -5,12 +5,12 @@ Your task is to build a simple CLI application that matches the text of user def
 
 ## Problem Statement
 
-For the purposes of publishing **_Benchmark Reports_** from our aggregated survey data, we use a set of standard questions, known as `Reference Questions`. However, within each survey the actual question text may be slightly different. We need to be able to match each individual question to a standard `Reference Question` in order to collect aggregated results.
+For the purposes of publishing **_Benchmark Reports_** from our aggregated survey data, we use a set of standard questions, known as **_Reference Questions_**. However, within each survey the actual question text may be slightly different. We need to be able to match each individual question to a standard **_Reference Question_** in order to collect aggregated results.
 
 
 ## Sample Data
 
-Included in the folder "example-data" are three sample data files:
+Included in the folder `data` are three sample data files:
 1. `reference_questions.csv` - Lists reference questions and unique codes used as identifiers
 2. `labeled_data.csv` - test data consisting of example questions from real surveys together with the code representing the reference question they match to - this data can be used for training your application.
 3. `test_questions.txt` - test data to use to run your application with.
@@ -25,17 +25,12 @@ Your coding challenge is to design and build the matching algorithm that will ac
 
 ## Other information
 
-Each `Reference Question` has a unique code, which you may use in the output to indicate which question is matched.
-
-We have also provided a set of test data, consisting of a number of example questions from real surveys, together with the Reference Question we would expect them to match. You can use this data to design and test your algorithm.
-
-Despite this being a small command line app, please approach this as you would a production problem using whatever approach to coding and testing you feel appropriate. Successful candidates will be asked to extend their implementation in a pair programming session as a component of the interview, so consider extensibility.
-
-Please include a Readme with any additional information you would like to include such as assumptions you made. You may wish to use it to explain any design decisions too.
-
-While we would like you to use this opportunity to show us what you can do, we also don't expect you to spend any longer than around 3-4 hours or build a large, complex application.
-
-If you have any questions or would like clarification on the requirements, please do email us.
+* Each **_Reference Question_** has a unique code, which you may use in the output to indicate which question is matched.
+* We have also provided a set of test data, consisting of a number of example questions from real surveys, together with the **_Reference Question_** we would expect them to match. You can use this data to design and test your algorithm.
+* Despite this being a small command line app, please approach this as you would a production problem using whatever approach to coding and testing you feel appropriate. Successful candidates will be asked to extend their implementation in a pair programming session as a component of the interview, so consider extensibility.
+* Please include a `README` with any additional information you would like to include such as assumptions you made. You may wish to use it to explain any design decisions too.
+* While we would like you to use this opportunity to show us what you can do, we also don't expect you to spend any longer than around 3-4 hours or build a large, complex application.
+* If you have any questions or would like clarification on the requirements, please do email us.
 
 
 ## Submitting your solution
