@@ -37,7 +37,7 @@ Your coding challenge is to design and build the matching algorithm that will ac
 
 Assuming you use Git, when you're ready to submit your solution, please use `git bundle` to package up a copy of your repository (with complete commit history) as a single file and send it to us as an email attachment.
 
-git bundle create culture-amp-coding-test.bundle master
+`git bundle create culture-amp-coding-test.bundle master`
 
 We're looking forward to your innovative solutions!
 
