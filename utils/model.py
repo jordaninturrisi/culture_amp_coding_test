@@ -1,9 +1,9 @@
-# Build & Compile Model
+import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Embedding, Flatten, Dropout, LSTM
 from keras.models import load_model
 
-def build_model(vocab_size, max_length):
+def build_model(vocab_size, max_length, verbose=True):
     model = Sequential()
     model.add(Embedding(vocab_size, 5, input_length=max_length))
     model.add(LSTM(5))
@@ -11,15 +11,22 @@ def build_model(vocab_size, max_length):
 
     model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
-    print('Model properties:')
-    model.summary()
+    if verbose:
+        print('Model properties:')
+        model.summary()
 
     return model
 
 
-def predict_with_model(x_test):
-    model = load_model('model/model')
+def predict_with_model(x_test, model=None, verbose=True):
 
-    test_outputs = model.predict(x_test)
+    if not model:
+        model = load_model('model/model')
 
-    return test_outputs
+    test_probs = model.predict(x_test)
+
+    if verbose:
+        np.set_printoptions(formatter={'float': lambda x: "{0:0.2f}".format(x)})
+        print('Test probabilities:\n', (test_probs*100))
+
+    return test_probs

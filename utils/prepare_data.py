@@ -6,7 +6,7 @@ def load_data(verbose=True):
     ref_q = np.loadtxt('data/reference_questions.csv', dtype=str, delimiter='|', skiprows=1)
     ref_q = np.char.strip(ref_q)
 
-    inputs = np.loadtxt('data/labeled_data (copy).csv', dtype=str, delimiter='|', skiprows=1)
+    inputs = np.loadtxt('data/labeled_data_clean.csv', dtype=str, delimiter='|', skiprows=1)
     inputs = np.char.strip(inputs)
 
     if verbose:
@@ -16,9 +16,12 @@ def load_data(verbose=True):
     return ref_q, inputs
 
 
-def load_test_data(tokenizer, max_length, verbose=True):
+def prepare_test_data(tokenizer, max_length, verbose=True):
     x_test = np.loadtxt('data/test_questions.txt', dtype=str, delimiter=',')
     x_test = np.char.strip(x_test)
+
+    if verbose:
+        print('Test data:\n', x_test)
 
     x_test = tokenizer.texts_to_sequences(x_test)
     x_test = pad_sequences(x_test, maxlen=max_length, padding='post')

@@ -5,7 +5,7 @@ import itertools
 
 # Plot the train/val loss/accuracy as a function of epoch
 # Include test loss & accuracy
-def plot_loss(history, score):
+def plot_loss(history):
 
 	# Set size of figure
 	plt.figure(figsize=(16,6))
@@ -15,7 +15,7 @@ def plot_loss(history, score):
 	plt.subplot(1, 2, 1)
 	plt.semilogy(history.history['loss'], color='r')
 	plt.semilogy(history.history['val_loss'], color='g')
-	plt.semilogy([score[0]]*len(history.history['loss']), color='k', linestyle=':')
+	# plt.semilogy([score[0]]*len(history.history['loss']), color='k', linestyle=':')
 	plt.axvline(np.argmin(history.history['val_loss']), color='k', linestyle=':')
 	plt.title('Model Loss')
 	plt.ylabel('Loss')
@@ -27,7 +27,7 @@ def plot_loss(history, score):
 	plt.subplot(1, 2, 2)
 	plt.plot([i*100 for i in history.history['acc']], color='r')
 	plt.plot([i*100 for i in history.history['val_acc']], color='g')
-	plt.plot([i*100 for i in [score[1]]*len(history.history['loss'])], color='k', linestyle=':')
+	# plt.plot([i*100 for i in [score[1]]*len(history.history['loss'])], color='k', linestyle=':')
 	plt.title('Model Accuracy')
 	plt.ylabel('Accuracy')
 	plt.xlabel('Epoch')
