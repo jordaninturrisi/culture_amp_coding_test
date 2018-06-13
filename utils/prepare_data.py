@@ -2,6 +2,8 @@ import numpy as np
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
+
+# Load Refrence Questions & Input Data
 def load_data(verbose=True):
     ref_q = np.loadtxt('data/reference_questions.csv', dtype=str, delimiter='|', skiprows=1)
     ref_q = np.char.strip(ref_q)
@@ -10,18 +12,18 @@ def load_data(verbose=True):
     inputs = np.char.strip(inputs)
 
     if verbose:
-        print('Reference questions:\n', ref_q)
+        print('\n\nReference questions:\n', ref_q)
         print('\nLabelled data:\n', inputs[:5])
 
     return ref_q, inputs
 
-
+# Load Test Data and tokenize for input to network
 def prepare_test_data(tokenizer, max_length, verbose=True):
     test_inputs = np.loadtxt('data/test_questions.txt', dtype=str, delimiter=',')
     test_inputs = np.char.strip(test_inputs)
 
     if verbose:
-        print('Test data:\n', test_inputs)
+        print('\n\nTest data:\n', test_inputs)
 
     x_test = tokenizer.texts_to_sequences(test_inputs)
     x_test = pad_sequences(x_test, maxlen=max_length, padding='post')
@@ -29,11 +31,12 @@ def prepare_test_data(tokenizer, max_length, verbose=True):
     return x_test, test_inputs
 
 
+# Tokenize inputs and create sparse binary output vector
 def create_training_vectors(inputs):
     x_train, tokenizer, max_length, vocab_size = vectorise_inputs(inputs)
 
     # x_train = inputs[:,0]
-    print('Inputs shape: ', x_train.shape)
+    print('\n\nInputs shape: ', x_train.shape)
     y_train = np.zeros([inputs.shape[0], 4])
 
     for i in range(inputs.shape[0]):
@@ -51,6 +54,7 @@ def create_training_vectors(inputs):
     return x_train, y_train, tokenizer, max_length, vocab_size
 
 
+# Tokenize inputs for network
 def vectorise_inputs(inputs):
     tokenizer = Tokenizer()
 

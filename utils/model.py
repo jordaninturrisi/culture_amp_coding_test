@@ -1,8 +1,9 @@
 import numpy as np
 from keras.models import Sequential
-from keras.layers import Dense, Embedding, Flatten, Dropout, LSTM
+from keras.layers import Dense, Embedding, LSTM
 from keras.models import load_model
 
+# Create and compile network
 def build_model(vocab_size, max_length, verbose=True):
     model = Sequential()
     model.add(Embedding(vocab_size, 5, input_length=max_length))
@@ -18,6 +19,8 @@ def build_model(vocab_size, max_length, verbose=True):
     return model
 
 
+# Use model to predict based on test data
+# Load model if one is not supplied
 def predict_with_model(x_test, model=None):
 
     if not model:
