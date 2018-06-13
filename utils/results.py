@@ -3,7 +3,10 @@ import numpy as np
 
 def top_result(outputs, ref_q):
     first_ind = np.argmax(outputs, axis=1)
-    # first_score =
+    first_score = np.zeros((10,1))
+
+    for ind in range(len(first_ind)):
+        first_score[ind] = outputs[ind, first_ind[ind]]
 
     first_code = []
     first_q = []
@@ -11,22 +14,14 @@ def top_result(outputs, ref_q):
         first_q.append(ref_q[first_ind[i], 0])
         first_code.append(ref_q[first_ind[i], 1])
 
-    return first_ind, first_q, first_code
+    return first_ind, first_q, first_code, first_score
 
 
 def second_result(outputs, ref_q, first_ind):
     mask = outputs
     for i in range(len(mask)):
-        outputs[i, first_ind[i]] = 0
+        mask[i, first_ind[i]] = 0
 
-    # second_ind, second_q, second_code = top_result(outputs, ref_q)
+    second_ind, second_q, second_code, second_score = top_result(mask, ref_q)
 
-    # second_ind = np.argmax(mask, axis=1)
-    #
-    # second_code = []
-    # second_q = []
-    # for i in range(len(second_ind)):
-    #     second_q.append(ref_q[second_ind[i], 0])
-    #     second_code.append(ref_q[second_ind[i], 1])
-
-    return outputs #second_ind, second_q, second_code
+    return second_ind, second_q, second_code, second_score

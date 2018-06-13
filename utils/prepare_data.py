@@ -17,16 +17,16 @@ def load_data(verbose=True):
 
 
 def prepare_test_data(tokenizer, max_length, verbose=True):
-    x_test = np.loadtxt('data/test_questions.txt', dtype=str, delimiter=',')
-    x_test = np.char.strip(x_test)
+    test_inputs = np.loadtxt('data/test_questions.txt', dtype=str, delimiter=',')
+    test_inputs = np.char.strip(test_inputs)
 
     if verbose:
-        print('Test data:\n', x_test)
+        print('Test data:\n', test_inputs)
 
-    x_test = tokenizer.texts_to_sequences(x_test)
+    x_test = tokenizer.texts_to_sequences(test_inputs)
     x_test = pad_sequences(x_test, maxlen=max_length, padding='post')
 
-    return x_test
+    return x_test, test_inputs
 
 
 def create_training_vectors(inputs):

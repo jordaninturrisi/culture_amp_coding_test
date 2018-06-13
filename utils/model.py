@@ -18,15 +18,11 @@ def build_model(vocab_size, max_length, verbose=True):
     return model
 
 
-def predict_with_model(x_test, model=None, verbose=True):
+def predict_with_model(x_test, model=None):
 
     if not model:
         model = load_model('model/model')
 
     test_probs = model.predict(x_test)
-
-    if verbose:
-        np.set_printoptions(formatter={'float': lambda x: "{0:0.2f}".format(x)})
-        print('Test probabilities:\n', (test_probs*100))
 
     return test_probs
