@@ -1,0 +1,58 @@
+# Instructions
+By Jordan Inturrisi
+
+## Requirements
+- Python3 (developed using Python v3.5.2)
+- Keras (developed using Keras v2.0.8 with Tensorflow backend)
+- Numpy (developed using Numpy v1.14.3)
+- Matplotlib (developed using v2.0.0)
+- Also imports OS & warnings
+
+
+# To Run Application
+From the main folder, run `python3 run.py`.
+An iPython notebook is provided to step through the code, section by section.
+
+
+# Preparing Data
+- Data was manually cleaned prior to being loaded into the application. This was then saved in the data folder under 'labeled_data_cleaned.csv'
+- Text was then loaded with numpy
+- The Keras Tokenizer class was used to convert words to integers (with each word corresponding to an individual integer). The Tokenizer was fit on the training set, so there could be issues with words appearing in the test set which aren't found in the training set.
+- To view the word index or word count of the Tokenizer, uncomment the lines in the function 'vectorise_inputs' in 'utils/prepare_data'.
+- Once words are tokenized (i.e. transformed to sequence of integers), shorter sequences are padded to the same length of the longest sequence, to ensure the network has a consistent input length.
+
+
+## The Model
+The model is a simple neural network with the following layers:
+- Embedding layer: mapping inputs to an embedding of size [max_length, 5] where max_length is the length of the longest string (most words in training data). For our purposes, this is 20.
+- LSTM layer with 5 units. The LSTM units use the additional 5 dimensions of the embedding layer as context.
+- 4 output units with softmax activation function, providing the probability of each output.
+
+In summary:
+Embedding[20, 5] > LSTM[5] > Softmax_Output[4]
+
+In this case the total input sentence is presented to the network/embedding layer/LSTM. It may function better by presenting the LSTM with inputs one word at a time. This will allow the LSTM layer to identify the order of words - not just that certain words are present in the input. For our purposes, the network functions fine as presented.
+
+
+## Training
+A pretrained model is supplied in the directory 'model/model'. If available, it will be loaded and used. Otherwise (if it were deleted or renamed), the program will train a new model and save it to the directory 'model/model'. The model is trained for 250 epochs with a batch size of 32 and validation split of 20%. This should only take around 5 minutes to complete (whilst running at low CPU utilisation). After training, a matplotlib graph will appear displaying the training/validation loss & accuracy. The 'Model Checkpoint' Keras callback is used to save the model with the minimum validation loss. This model is loaded after training.
+
+
+## Evaluating Model
+The model is then evaluated using the total training & validation data, displaying the overall loss & accuracy.
+
+
+## Test Data
+- Test data is loaded with numpy before being tokenized and padded to length 20. These inputs are then input to the model and used to predict the output probabilities.
+- Using these output probabilities, we determine the two closest matching reference questions, including the question, code, and score.
+
+
+## Relevance Measure
+The softmax output. This is the probability (from 0% to 100%) that the input text matches one of the four Reference Questions in the following order:
+ Code     Column/Output
+'TEA.2' |    0
+'INN.2' |    1
+'ENA.3' |    2
+'ALI.5' |    3
+
+As the task is quite simple, the model generally gives >99% confidence.
